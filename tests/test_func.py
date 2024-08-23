@@ -1,4 +1,3 @@
-import pytest
 from app.utils import load_spacy_model, process_text
 
 def test_process_text():
