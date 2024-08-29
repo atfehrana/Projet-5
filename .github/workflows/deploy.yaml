@@ -22,9 +22,9 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-   - name: Deploy to Heroku
+    - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        git remote add heroku https://git.heroku.com/projet5.git
         git push heroku main
