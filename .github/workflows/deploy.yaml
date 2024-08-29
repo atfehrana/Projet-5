@@ -13,18 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        fetch-depth: 0  # This ensures a full clone is performed
+        fetch-depth: 0  # Clone complet du dépôt
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.8'
-
-  
-    - name: Unshallow the repository
-      run: |
-        git fetch --unshallow
-
+        
     - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
