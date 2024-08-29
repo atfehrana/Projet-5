@@ -22,9 +22,13 @@ jobs:
       run: |
         pip install -r requirements.txt
 
+    - name: Set up Heroku credentials
+      run: |
+        echo "machine git.heroku.com" > ~/.netrc
+        echo "  login ${{ secrets.HEROKU_EMAIL }}" >> ~/.netrc
+        echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+
     - name: Deploy to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
         git remote add heroku https://git.heroku.com/projet5.git
         git push heroku main
