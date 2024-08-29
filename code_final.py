@@ -4,12 +4,14 @@ import joblib
 import spacy
 import os
 import re
+from spacy.cli import download
 from app.utils import load_spacy_model, process_text, predict_tags
 
 # Définir l'URI de suivi MLflow
 mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI","http://0.0.0.0:5000"))
 
 # Chargement du modèle SpaCy:
+download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
 
