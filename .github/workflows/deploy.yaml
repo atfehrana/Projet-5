@@ -22,10 +22,20 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Deploy to Heroku
+    - name: Install Heroku CLI
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
+
+    - name: Authenticate with Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_APP_NAME: projet5
       run: |
-        git remote add heroku https://git.heroku.com/projet5.git
-        git push heroku main -f
+        echo $HEROKU_API_KEY | heroku auth:token
+
+    - name: Set up Heroku git remote
+      run: |
+        heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+
+    - name: Deploy to Heroku
+      run: |
+        git push heroku main
