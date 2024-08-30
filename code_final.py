@@ -14,15 +14,18 @@ mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI","http://0.0.0.0:5000"))
 download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
+run_id = "a6da68aa450e4e9f8948baa7f4b61411"
+binarizer_path = "artifacts/binarizer/binarizer.pkl"
+binarizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=binarizer_path)
 
-binarizer_path = "./mlruns/1/a6da68aa450e4e9f8948baa7f4b61411/artifacts/binarizer.pkl"
-vectorizer_path = "./mlruns/1/081864e183a54a2db9522707ad621bc6/artifacts/tfidf_vectorizer.pkl"
-model_path = "./mlruns/1/0938a50bb1e04b4cb49204f0da4e37f7/artifacts/model/model.pkl"
+run_id = "081864e183a54a2db9522707ad621bc6"
+vectorizer_path = "artifacts/binarizer/tfidf_vectorizer.pkl"
+vectorizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=vectorizer_path)
 
-# Charger les artefacts avec joblib
-vectorizer = joblib.load(vectorizer_path)
-binarizer = joblib.load(binarizer_path)
-model = joblib.load(model_path)
+run_id = "081864e183a54a2db9522707ad621bc6"
+model_path = "artifacts/binarizer/tfidf_vectorizer.pkl"
+model = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=model_path)
+
 
 # Titre de l'interface Streamlit :
 st.title('Classification de questions')
