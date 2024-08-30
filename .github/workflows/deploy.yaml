@@ -33,7 +33,7 @@ jobs:
         pytest tests
 
     - name: Set up MLflow Tracking URI
-      run: echo "MLFLOW_TRACKING_URI=http://0.0.0.0:5000" >> $GITHUB_ENV
+      run: echo "MLFLOW_TRACKING_URI=http://my-mlflow-server.com:5000" >> $GITHUB_ENV
 
     - name: Deploy to Heroku
       env:
