@@ -15,9 +15,9 @@ download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
 
-binarizer_path = "./mlruns/1/01d924a6c9a84f9c807d3d86a4c739c0/artifacts/binarizer/binarizer.pkl"
-vectorizer_path = "./mlruns/1/b76d4e5da477429ab13918eceaf65976/artifacts/tfidf_vectorizer/vectorizer.pkl"
-model_path = "./mlruns/1/28989e27115f4f73acd9e18b0bf74671/artifacts/Regression_logistique/model.pkl"
+binarizer_path = "./mlruns/1/a6da68aa450e4e9f8948baa7f4b61411/artifacts/binarizer"
+vectorizer_path = "./mlruns/1/081864e183a54a2db9522707ad621bc6/artifacts/tfidf_vectorizer"
+model_path = "./mlruns/1/0938a50bb1e04b4cb49204f0da4e37f7/artifacts/model/model.pkl"
 
 # Charger les artefacts avec joblib
 vectorizer = joblib.load(vectorizer_path)
