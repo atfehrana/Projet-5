@@ -8,7 +8,7 @@ from spacy.cli import download
 from app.utils import load_spacy_model, process_text, predict_tags
 
 # Définir l'URI de suivi MLflow
-mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI","http://0.0.0.0:5000"))
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
 # Chargement du modèle SpaCy:
 download("en_core_web_sm")
@@ -25,7 +25,6 @@ vectorizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=ve
 run_id = "081864e183a54a2db9522707ad621bc6"
 model_path = "artifacts/binarizer/tfidf_vectorizer.pkl"
 model = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=model_path)
-
 
 # Titre de l'interface Streamlit :
 st.title('Classification de questions')
