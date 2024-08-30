@@ -23,10 +23,11 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        python -m spacy download en_core_web_sm
 
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
-      
+
     - name: Run tests
       run: |
         pytest tests
