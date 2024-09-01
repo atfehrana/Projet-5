@@ -14,17 +14,19 @@ mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI","http://15.237.111.188:5
 download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
-run_id = "a6da68aa450e4e9f8948baa7f4b61411"
-binarizer_path = "artifacts/binarizer/binarizer.pkl"
-binarizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=binarizer_path)
+def download_artifact(run_id, artifact_path):
+    artifact = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=artifact_path)
+    print(f"Successfully downloaded {artifact_path} from run {run_id}")
+    return artifact
 
-run_id = "49a470a4460641bca21d1fae26787160"
-binarizer_path = "artifacts/binarizer/binarizer.pkl"
-binarizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=binarizer_path)
+# Download the binarizer
+binarizer = download_artifact(run_id="a6da68aa450e4e9f8948baa7f4b61411", artifact_path="artifacts/binarizer/binarizer.pkl")
 
-run_id = "5f5df97741c34193ad813305014b75d5"
-model_path = "artifacts/model/model.pkl"
-model = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=model_path)
+# Attempt to download another binarizer
+binarizer = download_artifact(run_id="49a470a4460641bca21d1fae26787160", artifact_path="artifacts/binarizer/binarizer.pkl")
+
+# Download the model
+model = download_artifact(run_id="5f5df97741c34193ad813305014b75d5", artifact_path="artifacts/model/model.pkl")
 
 # Titre de l'interface Streamlit :
 st.title('Classification de questions')
