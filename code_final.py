@@ -8,7 +8,7 @@ from spacy.cli import download
 from app.utils import load_spacy_model, process_text, predict_tags
 
 # Définir l'URI de suivi MLflow
-mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI","http://0.0.0.0:5000"))
+mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI","http://15.237.111.188:5000"))
 
 # Chargement du modèle SpaCy:
 download("en_core_web_sm")
@@ -18,12 +18,12 @@ run_id = "a6da68aa450e4e9f8948baa7f4b61411"
 binarizer_path = "artifacts/binarizer/binarizer.pkl"
 binarizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=binarizer_path)
 
-run_id = "081864e183a54a2db9522707ad621bc6"
-vectorizer_path = "artifacts/binarizer/tfidf_vectorizer.pkl"
-vectorizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=vectorizer_path)
+run_id = "49a470a4460641bca21d1fae26787160"
+binarizer_path = "artifacts/binarizer/binarizer.pkl"
+binarizer = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=binarizer_path)
 
-run_id = "081864e183a54a2db9522707ad621bc6"
-model_path = "artifacts/binarizer/tfidf_vectorizer.pkl"
+run_id = "5f5df97741c34193ad813305014b75d5"
+model_path = "artifacts/model/model.pkl"
 model = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=model_path)
 
 # Titre de l'interface Streamlit :
