@@ -20,16 +20,16 @@ def download_artifact(run_id, artifact_path):
     return artifact
 
 # Download the binarizer
-binarizer = download_artifact(run_id="a6da68aa450e4e9f8948baa7f4b61411", artifact_path="artifacts/binarizer/binarizer.pkl")
+vectorizer = download_artifact(run_id="53ee1c48888743c28a5a733abe06a58f", artifact_path="artifacts/tfidf_vectorizer/vectorizer.pkl")
 
 # Attempt to download another binarizer
 binarizer = download_artifact(run_id="49a470a4460641bca21d1fae26787160", artifact_path="artifacts/binarizer/binarizer.pkl")
 
 # Download the model
 model = download_artifact(run_id="5f5df97741c34193ad813305014b75d5", artifact_path="artifacts/model/model.pkl")
-
 # Titre de l'interface Streamlit :
 st.title('Classification de questions')
+
 
 # Champ de saisie du titre :
 titre = st.text_input('Entrer Titre :')
