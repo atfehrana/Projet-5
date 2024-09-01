@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0  
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.8'
 
@@ -33,16 +33,12 @@ jobs:
         pytest tests
 
     - name: Set up MLflow Tracking URI
-      run: echo "MLFLOW_TRACKING_URI=http://my-mlflow-server.com:5000" >> $GITHUB_ENV
+      run: echo "MLFLOW_TRACKING_URI=http://15.237.111.188:5000" >> $GITHUB_ENV
 
     - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
       run: |
-        echo "machine git.heroku.com" > ~/.netrc
-        echo "  login ${HEROKU_EMAIL}" >> ~/.netrc
-        echo "  password ${HEROKU_API_KEY}" >> ~/.netrc
-        git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-        git push heroku main -f
+        heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+        git push heroku main
