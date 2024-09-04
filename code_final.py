@@ -55,6 +55,3 @@ if st.button('Suggestion des Tags'):
         st.write(f'Tags suggérés : {tags}')
     else:
         st.write('Veuillez saisir un titre ET une question.')
-
-
-
