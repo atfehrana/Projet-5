@@ -16,17 +16,21 @@ nlp = load_spacy_model("en_core_web_sm")
 
 def download_artifact(run_id, artifact_path):
     artifact = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path=artifact_path)
-    print(f"Successfully downloaded {artifact_path} from run {run_id}")
     return artifact
 
-# Download the binarizer
-vectorizer = download_artifact(run_id="53ee1c48888743c28a5a733abe06a58f", artifact_path="artifacts/tfidf_vectorizer/vectorizer.pkl")
+adresse = "s3://mlflow-ratfeh/53ee1c48888743c28a5a733abe06a58f/artifacts/tfidf_vectorizer/vectorizer.pkl"
+vectorizer_path = mlflow.artifacts.download_artifacts(adresse)
+vectorizer = joblib.load(vectorizer_path)
 
-# Attempt to download another binarizer
-binarizer = download_artifact(run_id="49a470a4460641bca21d1fae26787160", artifact_path="artifacts/binarizer/binarizer.pkl")
+# Chargement du binarizer :
+adresse = "s3://mlflow-ratfeh/53ee1c48888743c28a5a733abe06a58f/artifacts/binarizer/binarizer.pkl"
+binarizer_path = mlflow.artifacts.download_artifacts(adresse)
+binarizer = joblib.load(binarizer_path)
 
-# Download the model
-model = download_artifact(run_id="5f5df97741c34193ad813305014b75d5", artifact_path="artifacts/model/model.pkl")
+# Chargement du modèle de classification :
+adresse = "s3://mlflow-ratfeh/53ee1c48888743c28a5a733abe06a58f/artifacts/model/model.pkl"
+model = mlflow.sklearn.load_model(adresse)
+
 # Titre de l'interface Streamlit :
 st.title('Classification de questions')
 
