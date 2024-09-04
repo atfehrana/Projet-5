@@ -4,3 +4,4 @@ joblib
 spacy
 pytest
 boto3
+botocore
