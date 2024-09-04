@@ -3,3 +3,4 @@ mlflow
 joblib
 spacy
 pytest
+boto3
