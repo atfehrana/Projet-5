@@ -10,12 +10,6 @@ from app.utils import load_spacy_model, process_text, predict_tags
 download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
-import streamlit as st
-import joblib
-import os
-import boto3
-from spacy.cli import download
-from app.utils import load_spacy_model, process_text, predict_tags
 
 # Initialiser le client S3
 s3 = boto3.client('s3')
@@ -32,6 +26,11 @@ binarizer_local_path = '/tmp/binarizer.pkl'
 model_local_path = '/tmp/model.pkl'
 
 # Fonction pour télécharger si nécessaire
+import logging
+
+# Configurez les logs de débogage pour boto3
+logging.basicConfig(level=logging.DEBUG)
+
 def download_if_not_exists(s3, bucket_name, s3_key, local_path):
     if not os.path.exists(local_path):
         try:
@@ -40,8 +39,10 @@ def download_if_not_exists(s3, bucket_name, s3_key, local_path):
             st.write(f"Téléchargement réussi de {s3_key}")
         except Exception as e:
             st.write(f"Erreur lors du téléchargement de {s3_key}: {e}")
+            logging.exception("Exception lors du téléchargement depuis S3")
     else:
         st.write(f"Fichier déjà présent : {local_path}")
+
 
 # Télécharger les fichiers depuis S3 si nécessaire
 download_if_not_exists(s3, bucket_name, vectorizer_key, vectorizer_local_path)
@@ -66,6 +67,7 @@ if os.path.exists(model_local_path):
     st.write("Modèle chargé.")
 else:
     st.write("Le fichier model.pkl est introuvable.")
+
 
 
 print("Tous les fichiers ont été chargés.")
