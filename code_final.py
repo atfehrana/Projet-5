@@ -10,15 +10,17 @@ from app.utils import load_spacy_model, process_text, predict_tags
 download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
-# Chemins locaux vers les fichiers stockés dans le répertoire artifacts
-vectorizer_local_path = './artifacts/vectorizer.pkl'
-binarizer_local_path = './artifacts/binarizer.pkl'
-model_local_path = './artifacts/model.pkl'
+# Chemins absolus dans le répertoire Heroku
+vectorizer_local_path = os.path.join(os.getcwd(), 'artifacts/vectorizer.pkl')
+binarizer_local_path = os.path.join(os.getcwd(), 'artifacts/binarizer.pkl')
+model_local_path = os.path.join(os.getcwd(), 'artifacts/model.pkl')
 
-# Charger les fichiers localement
+# Chargement des fichiers
 vectorizer = joblib.load(vectorizer_local_path)
 binarizer = joblib.load(binarizer_local_path)
 model = joblib.load(model_local_path)
+
+print("Tous les fichiers ont été chargés.")
 
 print("Tous les fichiers ont été chargés.")
 
