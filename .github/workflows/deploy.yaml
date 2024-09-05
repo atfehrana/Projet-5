@@ -32,9 +32,6 @@ jobs:
       run: |
         pytest tests
 
-    - name: Set up MLflow Tracking URI
-      run: echo "MLFLOW_TRACKING_URI=http://15.237.111.188:5000" >> $GITHUB_ENV
-
     - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -48,4 +45,3 @@ jobs:
         git push heroku main -f
 
 
-        

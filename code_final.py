@@ -1,8 +1,5 @@
 import streamlit as st
-import mlflow
 import joblib
-import os
-import boto3
 from spacy.cli import download
 from app.utils import load_spacy_model, process_text, predict_tags
 
