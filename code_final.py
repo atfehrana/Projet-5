@@ -11,16 +11,15 @@ download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
 # Chemins absolus dans le répertoire Heroku
-vectorizer_local_path = os.path.join(os.getcwd(), 'artifacts/vectorizer.pkl')
-binarizer_local_path = os.path.join(os.getcwd(), 'artifacts/binarizer.pkl')
-model_local_path = os.path.join(os.getcwd(), 'artifacts/model.pkl')
+vectorizer_local_path = os.path.join(os.getcwd(), 'artifact/vectorizer.pkl')
+binarizer_local_path = os.path.join(os.getcwd(), 'artifact/binarizer.pkl')
+model_local_path = os.path.join(os.getcwd(), 'artifact/model.pkl')
 
 # Chargement des fichiers
 vectorizer = joblib.load(vectorizer_local_path)
 binarizer = joblib.load(binarizer_local_path)
 model = joblib.load(model_local_path)
 
-print("Tous les fichiers ont été chargés.")
 
 print("Tous les fichiers ont été chargés.")
 
