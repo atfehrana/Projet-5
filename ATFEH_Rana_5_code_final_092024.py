@@ -10,15 +10,14 @@ nlp = load_spacy_model("en_core_web_sm")
 
 st.title('Classification de questions')
 
-response_binarizer = requests.get("https://mlflow-ratfeh.s3.eu-west-3.amazonaws.com/53ee1c48888743c28a5a733abe06a58f/artifacts/binarizer/binarizer.pkl")
-binarizer = joblib.load(BytesIO(response_binarizer.content))
+vectorizer_local_path = './artefact/vectorizer.pkl'
+binarizer_local_path = './artefact/binarizer.pkl'
+model_local_path = './artefact/model.pkl'
 
-response_model = requests.get("https://mlflow-ratfeh.s3.eu-west-3.amazonaws.com/53ee1c48888743c28a5a733abe06a58f/artifacts/model/model.pkl")
-model = joblib.load(BytesIO(response_model.content))
-
-response_vectorizer = requests.get("https://mlflow-ratfeh.s3.eu-west-3.amazonaws.com/53ee1c48888743c28a5a733abe06a58f/artifacts/tfidf_vectorizer/vectorizer.pkl")
-vectorizer = joblib.load(BytesIO(response_vectorizer.content))
-
+# Charger les fichiers
+vectorizer = joblib.load(vectorizer_local_path)
+binarizer = joblib.load(binarizer_local_path)
+model = joblib.load(model_local_path)
 
 titre = st.text_input('Entrer Titre :')
 
