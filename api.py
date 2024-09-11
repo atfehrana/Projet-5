@@ -1,44 +1,57 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+import spacy
 import joblib
-from spacy.cli import download
-from app.utils import load_spacy_model, process_text
+import os
 
+# Initialize the Flask app
 app = Flask(__name__)
-CORS(app) 
 
-# Chargement du modèle SpaCy:
-download("en_core_web_sm")
-nlp = load_spacy_model("en_core_web_sm")
+# Load SpaCy model (make sure 'en_core_web_sm' is installed)
+try:
+    nlp = spacy.load('en_core_web_sm')
+    print("SpaCy model 'en_core_web_sm' loaded successfully.")
+except OSError:
+    from spacy.cli import download
+    download('en_core_web_sm')
+    nlp = spacy.load('en_core_web_sm')
 
-vectorizer_local_path = './artefact/vectorizer.pkl'
-binarizer_local_path = './artefact/binarizer.pkl'
-model_local_path = './artefact/model.pkl'
+# Load the trained model and vectorizer (replace these with actual paths)
+model_local_path = "model.joblib"
+vectorizer_local_path = "vectorizer.joblib"
 
-vectorizer = joblib.load(vectorizer_local_path)
-binarizer = joblib.load(binarizer_local_path)
+# Load pre-trained model and vectorizer
 model = joblib.load(model_local_path)
+vectorizer = joblib.load(vectorizer_local_path)
+print("Model and vectorizer loaded successfully.")
 
+# Define the /predict endpoint
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.get_json()
+    try:
+        # Get JSON data from request
+        data = request.get_json(force=True)
 
-    if not data or 'titre' not in data or 'question' not in data:
-        return jsonify({'error': 'Invalid data'}), 400
+        # Ensure the 'text' key is in the data
+        if 'text' not in data:
+            return jsonify({'error': 'Missing text field'}), 400
 
-    titre = data['titre']
-    question = data['question']
+        # Process input text with SpaCy
+        input_text = data['text']
+        doc = nlp(input_text)
 
-    texte = process_text(nlp, titre + ' ' + question)
-    texte = ' '.join(texte)
-    vecteur = vectorizer.transform([texte])
-    prediction = model.predict(vecteur)
-    tags = binarizer.inverse_transform(prediction)
+        # Vectorize the text using the loaded vectorizer
+        vectorized_text = vectorizer.transform([input_text])
 
-    return jsonify({'tags_predits': tags[0]})
+        # Make prediction using the loaded model
+        prediction = model.predict(vectorized_text)
 
+        # Return the prediction as a JSON response
+        return jsonify({'prediction': prediction.tolist()})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
-
-
-
+    port = int(os.environ.get("API_PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
