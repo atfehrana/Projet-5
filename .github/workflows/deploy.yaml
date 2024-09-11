@@ -22,8 +22,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --upgrade pip setuptools wheel
-        pip install -r requirements.txt
+        pip install --upgrade pip setuptools wheel --no-cache-dir
+        pip install numpy==1.21.6 --no-cache-dir
+        pip install -r requirements.txt --no-cache-dir
         python -m spacy download en_core_web_sm
 
     - name: Set PYTHONPATH
