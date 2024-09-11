@@ -1,5 +1,6 @@
-streamlit
-mlflow
+Flask
+Flask-CORS
+gunicorn
 joblib
+streamlit
 spacy
-pytest
