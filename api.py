@@ -5,16 +5,13 @@ from app.utils import load_spacy_model, process_text
 
 app = Flask(__name__)
 
-# Charger le modèle SpaCy
 download("en_core_web_sm")
 nlp = load_spacy_model("en_core_web_sm")
 
-# Chemins des fichiers du modèle
 vectorizer_local_path = './artefact/vectorizer.pkl'
 binarizer_local_path = './artefact/binarizer.pkl'
 model_local_path = './artefact/model.pkl'
 
-# Charger les fichiers
 vectorizer = joblib.load(vectorizer_local_path)
 binarizer = joblib.load(binarizer_local_path)
 model = joblib.load(model_local_path)
