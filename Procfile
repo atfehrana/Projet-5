@@ -1,1 +1,1 @@
-web: streamlit run app.py --server.port $PORT --server.enableCORS false --server.enableXsrfProtection false
+web: streamlit run ATFEH_Rana_5_code_final_092024.py --server.port $PORT --server.enableCORS false --server.enableXsrfProtection false
