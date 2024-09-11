@@ -20,12 +20,11 @@ jobs:
       with:
         python-version: '3.8'
 
-     - name: Install dependencies
+    - name: Install dependencies
       run: |
         pip install --upgrade pip setuptools wheel
         pip install -r requirements.txt
         python -m spacy download en_core_web_sm
-
 
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
@@ -45,4 +44,3 @@ jobs:
         echo "  password ${HEROKU_API_KEY}" >> ~/.netrc
         git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
         git push heroku main -f
-
