@@ -1,7 +1,6 @@
-Flask
-Flask-CORS
-gunicorn
-joblib
 streamlit
+joblib
 spacy
-scikit-learn
+pytest
+tensorflow 
+tensorflow_hub

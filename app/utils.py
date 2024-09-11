@@ -1,6 +1,10 @@
 import spacy
 import os
 import re
+import tensorflow as tf
+import tensorflow_hub as hub
+import numpy as np
+
 
 def load_spacy_model(model_name: str):
     nlp = spacy.load(model_name)
@@ -32,11 +36,18 @@ def process_text(nlp, text, allowed_words=None, unique=False):
     
     return words
 
-import numpy as np
-
-def predict_tags(vectorizer, binarizer, model, texte):
-    X = vectorizer.transform([texte])
-    y_pred = model.predict(X)
+def predict_tags(binarizer, model, embeddings):
+    y_pred = model.predict(embeddings)
     tags = binarizer.inverse_transform(y_pred)
-    tags = tags[0] if len(tags) > 0 else []
     return tags
+
+def get_use_embeddings(texts,  batch_size=8):
+    
+    model_use = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+
+    all_embeddings = []
+    for i in range(0, len(texts), batch_size):
+        batch_texts = texts[i:i + batch_size]
+        batch_embeddings = model_use(batch_texts).numpy()
+        all_embeddings.append(batch_embeddings)
+    return np.concatenate(all_embeddings, axis=0)
