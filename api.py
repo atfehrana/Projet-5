@@ -16,9 +16,9 @@ except OSError:
     download('en_core_web_sm')
     nlp = spacy.load('en_core_web_sm')
 
-binarizer_path = "./mlruns/1/a6da68aa450e4e9f8948baa7f4b61411/artifacts/binarizer.pkl"
-vectorizer_path = "./mlruns/1/081864e183a54a2db9522707ad621bc6/artifacts/tfidf_vectorizer.pkl"
-model_path = "./mlruns/1/0938a50bb1e04b4cb49204f0da4e37f7/artifacts/model/model.pkl"
+binarizer_path = "./artifacts/binarizer.pkl"
+vectorizer_path = "./artifacts/tfidf_vectorizer.pkl"
+model_path = "./artifacts/model/model.pkl"
 
 # Charger les artefacts avec joblib
 vectorizer = joblib.load(vectorizer_path)
