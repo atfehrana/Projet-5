@@ -14,7 +14,7 @@ question = st.text_input('Entrer Question :')
 if st.button('Suggestion des Tags'):
     if titre and question:
         # Appel à l'API Flask pour obtenir les tags prédits
-        api_url = "http://localhost:5000/predict"  # URL de l'API Flask dans la même application Heroku
+        api_url = "https://projet-5-14613fa14eef.herokuapp.com/predict"  
         payload = {'titre': titre, 'question': question}
         response = requests.post(api_url, json=payload)
 
