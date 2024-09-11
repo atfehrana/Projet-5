@@ -18,7 +18,7 @@ except OSError:
 
 binarizer_path = "./artifacts/binarizer.pkl"
 vectorizer_path = "./artifacts/vectorizer.pkl"
-model_path = "./artifacts/model/model.pkl"
+model_path = "./artifacts/model.pkl"
 
 # Charger les artefacts avec joblib
 vectorizer = joblib.load(vectorizer_path)
@@ -44,7 +44,6 @@ def predict():
         
         # Prédiction des tags
         tags_suggérés = predict_tags(vectorizer, binarizer, model, texte_propre)
-        tags_suggérés = tags_suggérés[0]  # Obtenir la première prédiction
         
         # Retourner les résultats sous forme JSON
         return jsonify({'tags_suggérés': tags_suggérés})
