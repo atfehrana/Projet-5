@@ -17,7 +17,7 @@ except OSError:
     nlp = spacy.load('en_core_web_sm')
 
 binarizer_path = "./artifacts/binarizer.pkl"
-vectorizer_path = "./artifacts/tfidf_vectorizer.pkl"
+vectorizer_path = "./artifacts/vectorizer.pkl"
 model_path = "./artifacts/model/model.pkl"
 
 # Charger les artefacts avec joblib
