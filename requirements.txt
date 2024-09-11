@@ -4,3 +4,4 @@ gunicorn
 joblib
 streamlit
 spacy
+scikit-learn
