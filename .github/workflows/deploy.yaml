@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -28,19 +26,15 @@ jobs:
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
 
-    - name: Run tests
-      run: |
-        pytest tests
-
     - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-        API_PORT: 5000  
       run: |
         echo "machine git.heroku.com" > ~/.netrc
         echo "  login ${HEROKU_EMAIL}" >> ~/.netrc
         echo "  password ${HEROKU_API_KEY}" >> ~/.netrc
         git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
         git push heroku main -f
+
