@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 import spacy
 import joblib
 import os
+import requests
+import joblib
+from io import BytesIO
 from app.utils import load_spacy_model, process_text, predict_tags
 
 # Initialize the Flask app
@@ -16,15 +19,14 @@ except OSError:
     download('en_core_web_sm')
     nlp = spacy.load('en_core_web_sm')
 
-binarizer_path = "./artifacts/binarizer.pkl"
-vectorizer_path = "./artifacts/vectorizer.pkl"
-model_path = "./artifacts/model.pkl"
+response_binarizer = requests.get("https://mlflow-ratfeh.s3.eu-west-3.amazonaws.com/53ee1c48888743c28a5a733abe06a58f/artifacts/binarizer/binarizer.pkl")
+binarizer = joblib.load(BytesIO(response_binarizer.content))
 
-# Charger les artefacts avec joblib
-vectorizer = joblib.load(vectorizer_path)
-binarizer = joblib.load(binarizer_path)
-model = joblib.load(model_path)
+response_vectorizer = requests.get("https://mlflow-ratfeh.s3.eu-west-3.amazonaws.com/53ee1c48888743c28a5a733abe06a58f/artifacts/tfidf_vectorizer/vectorizer.pkl")
+vectorizer = joblib.load(BytesIO(response_vectorizer.content))
 
+response_model = requests.get("https://mlflow-ratfeh.s3.eu-west-3.amazonaws.com/53ee1c48888743c28a5a733abe06a58f/artifacts/model/model.pkl")
+model = joblib.load(BytesIO(response_model.content))
 
 @app.route('/predict', methods=['POST'])
 def predict():
