@@ -2,7 +2,5 @@ streamlit
 mlflow
 joblib
 spacy==3.5.0
-thinc==8.1.0
-pydantic==1.10.2
 numpy<1.25.0
 pytest
