@@ -1,5 +1,6 @@
 streamlit
 mlflow
 joblib
-spacy
+spacy==3.5.0
+numpy<1.25.0
 pytest
