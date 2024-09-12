@@ -1,1 +1,0 @@
-web: streamlit run ATFEH_Rana_5_code_final_092024.py --server.port $PORT --server.enableCORS false
