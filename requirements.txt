@@ -3,3 +3,4 @@ spacy
 numpy
 joblib
 pytest
+scikit-learn
