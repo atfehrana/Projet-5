@@ -3,6 +3,6 @@ services:
     name: my-streamlit-app
     env: python
     buildCommand: python -m spacy download en_core_web_sm
-    startCommand: streamlit run app.py --server.port $PORT
+    startCommand: streamlit run ATFEH_Rana_5_code_final_092024.py --server.port $PORT
     plan: free
     autoDeploy: true
