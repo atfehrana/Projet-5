@@ -30,24 +30,24 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest tests
-
+        pytest tests      
+      
     - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-        run: |
-          # Set up Heroku authentication
-          echo "machine git.heroku.com" > ~/.netrc
-          echo "  login ${HEROKU_EMAIL}" >> ~/.netrc
-          echo "  password ${HEROKU_API_KEY}" >> ~/.netrc
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      run: |
+        # Set up Heroku authentication
+        echo "machine git.heroku.com" > ~/.netrc
+        echo "  login ${HEROKU_EMAIL}" >> ~/.netrc
+        echo "  password ${HEROKU_API_KEY}" >> ~/.netrc
 
-          git remote add heroku https://git.heroku.com/${HEROKU_APP_NAME}.git || true
+        # Ensure the remote is correctly set
+        git remote add heroku https://git.heroku.com/${HEROKU_APP_NAME}.git || true
 
-          # Push the code to Heroku
-          git push heroku main -f
-
+        # Push the code to Heroku
+        git push heroku main -f
 
 
 
