@@ -1,6 +1,6 @@
 # Projet de Classification Automatique des Questions Stack Overflow
 
-Ce projet vise à développer une application capable de suggérer des **tags pertinents** à des questions posées sur Stack Overflow en utilisant des modèles de machine learning. L'application a été développée en **Streamlit** et déployée sur **Render**. Elle utilise plusieurs approches, y compris des modèles de génération de topics (**LDA** et **NMF**) et des modèles supervisés pour prédire les tags des questions.
+Ce projet vise à développer une application capable de suggérer des tags pertinents à des questions posées sur Stack Overflow en utilisant des modèles de machine learning. L'application a été développée en **Streamlit** et déployée sur Render. Elle utilise plusieurs approches, y compris des modèles de génération de topics (LDA et NMF) et des modèles supervisés pour prédire les tags des questions.
 
 ## Source des données
 
@@ -78,4 +78,9 @@ Si vous souhaitez exécuter cette application localement, voici les étapes à s
    streamlit run ATFEH_Rana_5_code_final_092024.py
    ```
 
+<<<<<<< HEAD
 3. Accédez à l'application via l'URL fournie du navigateur
+=======
+3. Accédez à l'application via l'URL fournie du navigateur
+
+>>>>>>> origin/main
