@@ -5,3 +5,10 @@ services:
     startCommand: streamlit run ATFEH_Rana_5_code_final_092024.py --server.port $PORT
     plan: free
     autoDeploy: true
+
+  - type: web
+    name: my-flask-api
+    env: python
+    startCommand: python api.py  
+    plan: free
+    autoDeploy: true

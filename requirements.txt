@@ -4,3 +4,4 @@ numpy
 joblib
 pytest
 scikit-learn==1.5.1
+flask
