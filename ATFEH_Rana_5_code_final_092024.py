@@ -19,8 +19,11 @@ if st.button('Suggestion des Tags'):
         
         if response.status_code == 200:
             tags = response.json().get('suggested_tags', [])
-            st.write(f'Tags suggérés : {tags}')
+            if tags:
+                st.success(f'Tags suggérés : {tags}')
+            else:
+                st.warning('Aucun tag suggéré.')
         else:
-            st.write('Une erreur est survenue lors de la prédiction.')
+            st.error(f'Une erreur est survenue : {response.text}')
     else:
-        st.write('Veuillez saisir un titre ET une question.')
+        st.error('Veuillez saisir un titre ET une question.')

@@ -12,3 +12,4 @@ services:
     startCommand: gunicorn api:app --bind 0.0.0.0:$PORT  
     plan: free
     autoDeploy: true
+
