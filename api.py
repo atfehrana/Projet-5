@@ -40,6 +40,3 @@ def predict():
     tags = tags[0].tolist()  
 
     return jsonify({'suggested_tags': tags})
-
-if __name__ == '__main__':
-    app.run(debug=True)
