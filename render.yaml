@@ -9,6 +9,6 @@ services:
   - type: web
     name: my-flask-api
     env: python
-    startCommand: python api.py  
+    startCommand: gunicorn api:app --bind 0.0.0.0:$PORT  
     plan: free
     autoDeploy: true

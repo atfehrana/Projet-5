@@ -13,8 +13,7 @@ question = st.text_input('Entrer Question :')
 # Bouton de prédiction
 if st.button('Suggestion des Tags'):
     if titre and question:
-        # URL de l'API Flask déployée sur Render
-        url = 'https://my-flask-api.onrender.com/predict'
+        url = 'https://api-f11f.onrender.com/predict'
         data = {'title': titre, 'question': question}
         response = requests.post(url, json=data)
         
